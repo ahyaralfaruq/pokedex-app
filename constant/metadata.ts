@@ -1,24 +1,4 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Tomorrow } from "next/font/google";
-import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
-
-const tomorrow = Tomorrow({
-  variable: "--font-tomorrow",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  subsets: ["latin"]
-})
-
-export const metadata: Metadata = {
+export const DataMetaData = {
   title: "Pokedex App",
   applicationName: "Pokedex App",
   description: "Create simple app pokedex app",
@@ -224,21 +204,3 @@ export const metadata: Metadata = {
     "theme-color": '#000000',
   },
 };
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-
-  console.log(tomorrow)
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${tomorrow.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-  );
-}
