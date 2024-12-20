@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Tomorrow } from "next/font/google";
+import { Geist, Tomorrow } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
 
 const tomorrow = Tomorrow({
   variable: "--font-tomorrow",
@@ -33,26 +28,26 @@ export const metadata: Metadata = {
   archives: ['https://nextjs.org/13'],
   assets: ['https://nextjs.org/assets'],
   bookmarks: ['https://nextjs.org/13'],
-  manifest: 'https://nextjs.org/manifest.json',
+  // manifest: 'https://nextjs.org/manifest.json',
   classification: "pokedex app, example app, practice app, next js app, next js project, nextjs app, nextjs project, mini app",
-  icons: {
-    icon: [
-      { url: '/icon.png' },
-      new URL('/icon.png', 'https://example.com'),
-      { url: '/icon-dark.png', media: '(prefers-color-scheme: dark)' },
-    ],
-    shortcut: ['/shortcut-icon.png'],
-    apple: [
-      { url: '/apple-icon.png' },
-      { url: '/apple-icon-x3.png', sizes: '180x180', type: 'image/png' },
-    ],
-    other: [
-      {
-        rel: 'apple-touch-icon-precomposed',
-        url: '/apple-touch-icon-precomposed.png',
-      },
-    ],
-  },
+  // icons: {
+  //   icon: [
+  //     { url: '/icon.png' },
+  //     new URL('/icon.png', 'https://example.com'),
+  //     { url: '/icon-dark.png', media: '(prefers-color-scheme: dark)' },
+  //   ],
+  //   shortcut: ['/shortcut-icon.png'],
+  //   apple: [
+  //     { url: '/apple-icon.png' },
+  //     { url: '/apple-icon-x3.png', sizes: '180x180', type: 'image/png' },
+  //   ],
+  //   other: [
+  //     {
+  //       rel: 'apple-touch-icon-precomposed',
+  //       url: '/apple-touch-icon-precomposed.png',
+  //     },
+  //   ],
+  // },
   robots: {
     index: false,
     follow: true,
@@ -221,7 +216,7 @@ export const metadata: Metadata = {
   },
   other: {
     instagram: ['https://instagram.com/ayar.js', 'https://instagram.com/booyar'],
-    "theme-color": '#000000',
+    "theme-color": '#050816',
   },
 };
 
@@ -230,13 +225,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  console.log(tomorrow)
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${tomorrow.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${tomorrow.variable} antialiased`}>
         {children}
       </body>
     </html>
