@@ -28,8 +28,8 @@ const Header = () => {
 
   return (
     <header
-      className={`sm:px-16 px-6 w-full flex items-center py-5 fixed top-0 z-20 ${
-        scrolled ? "bg-primary" : "bg-transparent"
+      className={`transition-[background-color_0.3s_ease-in-out] sm:px-16 px-6 w-full flex items-center py-5 fixed top-0 z-20 ${
+        scrolled ? "bg-primary-gua" : "bg-transparent"
       }`}
     >
       <nav className='w-full flex justify-between items-center max-w-7xl mx-auto'>
