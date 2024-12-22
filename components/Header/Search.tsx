@@ -25,15 +25,15 @@ const Search = () => {
   return (
     <div className="w-2/3 lg:w-1/3 h-12 overflow-hidden rounded-3xl border border-secondary focus-within:border-[#1f6feb] focus-within:border-2">
       <div className="flex items-center flex-nowrap gap-2 w-full h-full">
-        <label htmlFor="search" className="ml-2 h-9 cursor-pointer">
-          <Image src={pocket} alt="pocket monster" />
+        <label htmlFor="search" className="ml-2 h-8 lg:h-9 cursor-pointer">
+          <Image src={pocket} alt="pocket monster" className="align-middle" />
         </label>
 
         <input 
           type="text"
           id="search"
-          className="w-full h-full px-5 py-3 border-none outline-none bg-transparent"
-          placeholder="Search"
+          className="w-full h-full px-5 py-3 border-none outline-none !bg-transparent text-sm md:text-base"
+          placeholder="Search pokemon by name or ID"
           value={text}
           onChange={handleChange}
           onKeyDown={handleEnter}

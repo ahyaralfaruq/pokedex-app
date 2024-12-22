@@ -35,6 +35,7 @@ const Header = () => {
       <nav className='w-full flex justify-between items-center max-w-7xl mx-auto'>
         <Link
           href="/"
+          scroll={false}
           className='flex items-center gap-2'
           onClick={() => {
             setActive("");

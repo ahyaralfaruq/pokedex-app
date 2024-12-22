@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="relative z-0 bg-primary-gua">
+      <main className="relative z-0 bg-primary-gua min-h-screen">
         <Suspense fallback={<Loading />}>
           <HomeSection />
         </Suspense>
