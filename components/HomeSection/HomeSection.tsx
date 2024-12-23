@@ -1,10 +1,11 @@
 "use client"
-import { useState, useEffect, Suspense } from "react"
+import { useState, useEffect, Suspense, useMemo } from "react"
 import { useSearchParams, useRouter } from "next/navigation";
 import axios from "axios"
 import { parseStringify } from "@/lib/utils";
-import PaginationDemo from "./Pagination";
-import LoadingPagination from "./LoadingPagination";
+import {LoadingCards, LoadingPagination} from "./Loading";
+import dynamic from "next/dynamic";
+import ErrorSearch from "./ErrorSearch";
 
 const HomeSection = () => {
   const [poke, setPoke] = useState<any>([]);
@@ -17,6 +18,14 @@ const HomeSection = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get('search');
+
+  const CardsWrapper = dynamic(() => import("./CardsWrapper"), {
+    loading: () => <LoadingCards />,
+  });
+  
+  const PaginationDemo = dynamic(() => import("./Pagination"), {
+    loading: () => <LoadingPagination page={page} totalPage={totalPage} />,
+  });
 
   const handlePrevPage = (props?: number) => {
     if(page === 1  || page < 2) return
@@ -34,6 +43,11 @@ const HomeSection = () => {
     setError("")
     router.push("/", { scroll: false })
   }
+
+  // memoize large image
+  const getImageByArtWorkSprites = useMemo(() => (data: any) => {
+    return data.sprites.other["official-artwork"]["front_default"]
+  },[])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,48 +83,34 @@ const HomeSection = () => {
       <div className="px-8 lg:px-16 max-w-7xl mx-auto mt-12 lg:mt-24">
         {
           error ? (
-            <>
-              <h3 className="font-tomorrow text-white text-center text-2xl md:text-4xl mb-12">
-                POKEMON NOT FOUND
-              </h3>
-
-              <h1 className="font-tomorrow text-red-600 text-center text-7xl mb-4">
-                4.0.4
-              </h1>
-
-              <p className="font-tomorrow text-white text-center mb-24">Pokemon tidak ditemukan</p>
-              
-              <div className="text-center">
-                <button 
-                  type="button" 
-                  className="green-pink-gradient p-[1px] rounded-[20px]"
-                  onClick={handleNotFound}
-                >
-                  <div className="bg-tertiary rounded-[20px] py-2 px-12 flex justify-evenly items-center flex-col">
-                    BACK
-                  </div>
-                </button>
-              </div>
-            </>
+            <ErrorSearch handleError={handleNotFound} />
           ) : (
             <>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap mb-[120px]">
                 {
-                  poke?.map((data: any) => (
-                    <p key={data.name}>
-                      test
-                    </p>
-                  ))
+                  Array.isArray(poke) && poke?.map((data: any) => {
+
+                    const imageValue = getImageByArtWorkSprites(data)
+
+                    return (
+                      <CardsWrapper
+                        key={data.id}
+                        id={data.id}
+                        height={data.height}
+                        image={imageValue}
+                        name={data.species.name}
+                        weight={data.weight}
+                      />
+                    )
+                  })
                 }
               </div>
-              <Suspense fallback={<LoadingPagination />}>
-                <PaginationDemo
-                  page={page}
-                  prev={handlePrevPage}
-                  next={handleNextPage}
-                  totalPage={totalPage}
-                />
-                </Suspense>
+              <PaginationDemo
+                page={page}
+                prev={handlePrevPage}
+                next={handleNextPage}
+                totalPage={totalPage}
+              />
             </>
           )
         }        

@@ -1,8 +1,8 @@
 GET https://pokeapi.co/api/v2/pokemon
 
 ###
-GET https://pokeapi.co/api/v2/pokemon/exeggcute
+GET https://pokeapi.co/api/v2/pokemon?offset=1200&limit=100
 
 ###
 
-GET https://pokeapi.co/api/v2/pokemon/1/
+GET https://pokeapi.co/api/v2/pokemon/koraidon/
