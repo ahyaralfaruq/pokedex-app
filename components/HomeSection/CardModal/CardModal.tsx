@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 import { LoadingCardChar } from "../Loading";
 import PokemonTypes from "./PokemonTypes";
 
-const CardModal = ({ id, image } : {id: number; image: string }) => {
+const CardModal = ({ id, image } : {id: number; image: string | any }) => {
   const [data, setData] = useState<any>({})
 
   const PokemonCharacteristics = dynamic(() => import("./PokemonCharacteristics"), {
